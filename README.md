@@ -23,5 +23,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+require "http_monkey"
+require "http_monkey/middlewares/cookie"
 
+HttpMonkey.configure do
+  # Default HTTP Headers (to all requests)
+  middlewares.use HttpMonkey::M::Cookie, :store => HttpMonkey::Cookie::MemoryStore.new
+end
+
+response = HttpMonkey.at("http://domain.com").get
+# Returns Set-Cookie: token=magic;Version=1;Comment=;Domain=.domain.com.br;Path=/;Max-Age=999999999;httpOnly
+
+HttpMonkey.at("http://domain.com/service").get
+# Uses Cookie: token=magic etc.
+
+HttpMonkey.at("http://example.com").get
+# Don't send cookies
+```
