@@ -1,4 +1,5 @@
-require "http_monkey-cookie"
+require "http_monkey"
+require "http_monkey/cookie"
 
 require "minitest/autorun"
 require "minitest/reporters"

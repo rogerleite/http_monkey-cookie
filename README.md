@@ -25,7 +25,7 @@ Or install it yourself as:
 
 ``` ruby
 require "http_monkey"
-require "http_monkey/middlewares/cookie"
+require "http_monkey/cookie"
 
 HttpMonkey.configure do
   # Default HTTP Headers (to all requests)
