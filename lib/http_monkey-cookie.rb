@@ -1,3 +1,4 @@
+require "http_monkey"
 require "http_monkey-cookie/version"
 
 module HttpMonkey
