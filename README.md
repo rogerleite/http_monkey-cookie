@@ -29,7 +29,7 @@ require "http_monkey/cookie"
 
 HttpMonkey.configure do
   # Default HTTP Headers (to all requests)
-  middlewares.use HttpMonkey::M::Cookie, :store => HttpMonkey::Cookie::MemoryStore.new
+  middlewares.use HttpMonkey::M::Cookie
 end
 
 response = HttpMonkey.at("http://domain.com").get
