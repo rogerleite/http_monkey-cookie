@@ -6,6 +6,7 @@ TOC:
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Notes](#notes)
 
 ## Installation
 
@@ -41,3 +42,13 @@ HttpMonkey.at("http://domain.com/service").get
 HttpMonkey.at("http://example.com").get
 # Don't send cookies
 ```
+
+## Notes
+
+This version is experimental and can explode in any moment.
+
+Some resources to build a new cookie project:
+* [Great doc about cookies specifications](http://hc.apache.org/httpclient-3.x/cookies.html)
+* [Persistent Client State HTTP Cookies (netscape spec)](http://curl.haxx.se/rfc/cookie_spec.html)
+* [HTTP State Management Mechanism RFC 2109](http://pretty-rfc.herokuapp.com/RFC2109)
+* [HTTP State Management Mechanism RFC 2965](http://pretty-rfc.herokuapp.com/RFC2965)
