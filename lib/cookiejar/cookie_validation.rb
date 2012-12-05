@@ -93,9 +93,14 @@ module CookieJar
     def self.domains_match tested_domain, base_domain
       base = effective_host base_domain
       search_domains = compute_search_domains_for_host base
+      #puts "== #{tested_domain.inspect} vs #{search_domains.inspect}" # debug like js
       result = search_domains.find do |domain|
-        domain == tested_domain
+        /#{tested_domain}/ =~ domain
       end
+      #old way docs here:
+      #result = search_domains.find do |domain|
+      #  domain == tested_domain
+      #end
       result
     end
 
