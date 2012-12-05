@@ -34,7 +34,7 @@ HttpMonkey.configure do
 end
 
 response = HttpMonkey.at("http://domain.com").get
-# Returns Set-Cookie: token=magic;Version=1;Comment=;Domain=.domain.com.br;Path=/;Max-Age=999999999;httpOnly
+# Returns Set-Cookie: token=magic;Version=1;Comment=;Domain=.domain.com;Path=/;Max-Age=999999999;httpOnly
 
 HttpMonkey.at("http://domain.com/service").get
 # Uses Cookie: token=magic etc.
