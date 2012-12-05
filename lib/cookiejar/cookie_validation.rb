@@ -46,7 +46,7 @@ module CookieJar
     TOKEN = /\A#{PATTERN::TOKEN}\Z/
     PARAM1 = /\A(#{PATTERN::TOKEN})(?:=#{PATTERN::VALUE1})?\Z/
     PARAM2 = Regexp.new "(#{PATTERN::TOKEN})(?:=(#{PATTERN::VALUE2}))?(?:\\Z|;)", '', 'n'
-    # TWO_DOT_DOMAINS = /\A\.(com|edu|net|mil|gov|int|org)\Z/
+    TWO_DOT_DOMAINS = /\A\.(com|edu|net|mil|gov|int|org)\Z/
 
     # Converts the input object to a URI (if not already a URI)
     #
@@ -95,28 +95,9 @@ module CookieJar
       search_domains = compute_search_domains_for_host base
       #puts "== #{tested_domain.inspect} vs #{search_domains.inspect}" # debug like js
       result = search_domains.find do |domain|
-        /#{tested_domain}/ =~ domain
+        domain == tested_domain
       end
-      #old way docs here:
-      #result = search_domains.find do |domain|
-      #  domain == tested_domain
-      #end
       result
-    end
-
-    # Compute the reach of a hostname (RFC 2965, section 1)
-    # Determines the next highest superdomain
-    #
-    # @param [String,URI,Cookie] hostname hostname, or object holding hostname
-    # @return [String,nil] next highest hostname, or nil if none
-    def self.hostname_reach hostname
-      host = to_domain hostname
-      host = host.downcase
-      match = BASE3_HOSTNAME.match(host)
-      match = match || BASE_HOSTNAME.match(host)
-      if match
-        match[1]
-      end
     end
 
     # Compute the base of a path, for default cookie path assignment
@@ -170,10 +151,10 @@ module CookieJar
       host = effective_host host
       result = [host]
       unless host =~ IPADDR
-        result << ".#{host}"
-        base = hostname_reach host
-        if base
-          result << ".#{base}"
+        splited_host = host.split(/\./)
+        splited_host.each_with_index do |subdomain, index|
+          break if TWO_DOT_DOMAINS =~ ".#{subdomain}"
+          result << ".#{splited_host[index..-1].join('.')}"
         end
       end
       result
