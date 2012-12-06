@@ -4,6 +4,7 @@ module HttpMonkey::Middlewares
 
     def initialize(app, options = {})
       @app = app
+      #FIXME: http_monkey v0.0.3, change store to env.storage
       @store = options.fetch(:store, HttpMonkey::Cookie::MemoryStore.instance)
       @debug = options.fetch(:debug, false)
     end
